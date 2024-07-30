@@ -1,8 +1,9 @@
 <template>
     <li :class="{ completed: localTask.completed }">
       <input type="checkbox" v-model="localTask.completed" @change="toggleTask" />
-      <span v-if="!isEditing" @dblclick="editTask">{{ localTask.text }}</span>
+      <span v-if="!isEditing" @dblclick="startEditing">{{ localTask.text }}</span>
       <input v-else v-model="newText" @keyup.enter="saveTask" @blur="saveTask" />
+      <small>{{ localTask.timestamp }}</small>
       <button @click="removeTask">Remove</button>
       <button @click="startEditing">Edit</button>
     </li>
@@ -10,7 +11,7 @@
   
   <script>
   export default {
-    props: ['task', 'index'],
+    props: ['task'],
     data() {
       return {
         localTask: { ...this.task },
@@ -20,10 +21,10 @@
     },
     methods: {
       removeTask() {
-        this.$emit('remove-task', this.index);
+        this.$emit('remove-task', this.task.id);
       },
       toggleTask() {
-        this.$emit('toggle-task', this.index);
+        this.$emit('toggle-task', this.task.id);
       },
       startEditing() {
         this.isEditing = true;
@@ -33,7 +34,7 @@
         if (this.newText.trim()) {
           this.isEditing = false;
           this.localTask.text = this.newText;
-          this.$emit('edit-task', this.index, this.newText);
+          this.$emit('edit-task', this.task.id, this.newText);
         }
       },
     }
@@ -47,6 +48,11 @@
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+  }
+  
+  li:hover {
+    background-color: #f9f9f9;
   }
   
   .completed span {
@@ -68,14 +74,22 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    background-color: #007bff;
+    color: white;
   }
   
   button:hover {
-    background-color: #f0f0f0;
+    background-color: #0056b3;
   }
   
   button:active {
-    background-color: #ddd;
+    background-color: #003f7f;
+  }
+  
+  small {
+    color: #888;
+    font-size: 0.8em;
+    margin-left: 10px;
   }
   </style>
   

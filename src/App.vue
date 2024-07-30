@@ -62,7 +62,7 @@ export default {
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
+  background: linear-gradient(to bottom right, #a8edea, #fed6e3); /* Gradient Background */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -77,7 +77,7 @@ header {
 
 main {
   padding: 20px;
-  background-color: white;
+  background-color: #f5f5f5; /* Light gray for better contrast */
   border-radius: 0 0 8px 8px;
 }
 

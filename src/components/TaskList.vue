@@ -7,6 +7,7 @@
         :index="index"
         @remove-task="removeTask"
         @toggle-task="toggleTask"
+        @edit-task="editTask"
       />
     </ul>
   </template>
@@ -25,6 +26,9 @@
       },
       toggleTask(index) {
         this.$emit('toggle-task', index);
+      },
+      editTask(index, newText) {
+        this.$emit('edit-task', index, newText);
       }
     }
   }
@@ -34,6 +38,7 @@
   ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
   }
   </style>
   

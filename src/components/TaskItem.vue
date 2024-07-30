@@ -1,11 +1,13 @@
 <template>
     <li :class="{ completed: localTask.completed }">
       <input type="checkbox" v-model="localTask.completed" @change="toggleTask" />
-      <span v-if="!isEditing" @dblclick="startEditing">{{ localTask.text }}</span>
+      <span v-if="!isEditing" @dblclick="startEditing" class="task-text">{{ localTask.text }}</span>
       <input v-else v-model="newText" @keyup.enter="saveTask" @blur="saveTask" />
       <small>{{ localTask.timestamp }}</small>
-      <button @click="removeTask">Remove</button>
-      <button @click="startEditing">Edit</button>
+      <div class="task-actions">
+        <button @click="removeTask">Remove</button>
+        <button @click="startEditing">Edit</button>
+      </div>
     </li>
   </template>
   
@@ -49,15 +51,23 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;
     transition: background-color 0.3s;
+    word-wrap: break-word;
   }
   
   li:hover {
-    background-color: #f9f9f9;
+    background-color: #f1f1f1;
   }
   
-  .completed span {
+  .completed .task-text {
     text-decoration: line-through;
     color: #aaa;
+  }
+  
+  .task-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   
   input[type="text"] {
@@ -90,6 +100,11 @@
     color: #888;
     font-size: 0.8em;
     margin-left: 10px;
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 5px;
   }
   </style>
   

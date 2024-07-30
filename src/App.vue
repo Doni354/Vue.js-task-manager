@@ -9,6 +9,7 @@
 <script>
 import AddTask from './components/AddTask.vue'
 import TaskList from './components/TaskList.vue'
+import { v4 as uuidv4 } from 'uuid'; // Import UUID for unique IDs
 
 export default {
   components: {
@@ -21,17 +22,25 @@ export default {
     };
   },
   methods: {
-    addTask(task) {
-      this.tasks.push(task);
+    addTask(taskText) {
+      const newTask = {
+        id: uuidv4(),
+        text: taskText,
+        completed: false,
+        timestamp: new Date().toLocaleString(),
+      };
+      this.tasks.push(newTask);
     },
-    removeTask(index) {
-      this.tasks.splice(index, 1);
+    removeTask(id) {
+      this.tasks = this.tasks.filter(task => task.id !== id);
     },
-    toggleTask(index) {
-      this.tasks[index].completed = !this.tasks[index].completed;
+    toggleTask(id) {
+      const task = this.tasks.find(task => task.id === id);
+      task.completed = !task.completed;
     },
-    editTask(index, newText) {
-      this.tasks[index].text = newText;
+    editTask(id, newText) {
+      const task = this.tasks.find(task => task.id === id);
+      task.text = newText;
     }
   }
 }

@@ -1,10 +1,9 @@
 <template>
     <ul>
       <TaskItem
-        v-for="(task, index) in tasks"
-        :key="index"
+        v-for="task in tasks"
+        :key="task.id"
         :task="task"
-        :index="index"
         @remove-task="removeTask"
         @toggle-task="toggleTask"
         @edit-task="editTask"
@@ -21,14 +20,14 @@
     },
     props: ['tasks'],
     methods: {
-      removeTask(index) {
-        this.$emit('remove-task', index);
+      removeTask(id) {
+        this.$emit('remove-task', id);
       },
-      toggleTask(index) {
-        this.$emit('toggle-task', index);
+      toggleTask(id) {
+        this.$emit('toggle-task', id);
       },
-      editTask(index, newText) {
-        this.$emit('edit-task', index, newText);
+      editTask(id, newText) {
+        this.$emit('edit-task', id, newText);
       }
     }
   }

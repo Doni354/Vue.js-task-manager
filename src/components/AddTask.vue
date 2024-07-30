@@ -15,7 +15,7 @@
     methods: {
       submitTask() {
         if (this.task.trim()) {
-          this.$emit('add-task', { text: this.task, completed: false });
+          this.$emit('add-task', this.task);
           this.task = '';
         }
       }
@@ -42,17 +42,17 @@
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     cursor: pointer;
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
   }
   
   button:active {
-    background-color: #003f7f;
+    background-color: #1e7e34;
   }
   </style>
   

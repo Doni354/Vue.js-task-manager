@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Task Manager</h1>
     <AddTask @add-task="addTask" />
-    <TaskList :tasks="tasks" @remove-task="removeTask" @toggle-task="toggleTask" />
+    <TaskList :tasks="tasks" @remove-task="removeTask" @toggle-task="toggleTask" @edit-task="editTask" />
   </div>
 </template>
 
@@ -29,13 +29,24 @@ export default {
     },
     toggleTask(index) {
       this.tasks[index].completed = !this.tasks[index].completed;
+    },
+    editTask(index, newText) {
+      this.tasks[index].text = newText;
     }
   }
 }
 </script>
 
 <style scoped>
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
 h1 {
   text-align: center;
+  color: #333;
 }
 </style>

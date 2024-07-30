@@ -1,5 +1,9 @@
 # task-manager
 
+
+Aplikasi task manager/to-do list berbasis web menggunakan Vue.js
+
+
 ## Project setup
 ```
 npm install
